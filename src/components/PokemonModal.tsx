@@ -33,6 +33,20 @@ function PokemonModal({
   closeModal,
 }: PokemonModalProps) {
 
+    const [barsReady, setBarsReady] = useState(false)
+
+useEffect(() => {
+
+  setBarsReady(false)
+
+  const t = setTimeout(() => {
+    setBarsReady(true)
+  }, 80)
+
+  return () => clearTimeout(t)
+
+}, [data])
+
   const [desc, setDesc] =
     useState<string>("")
 
@@ -300,18 +314,17 @@ function PokemonModal({
                       <div className="flex-1 bg-gray-200 rounded-full h-2">
 
                         <div
-                          className={`h-2 rounded-full ${
-                            statBarColors[
-                              statName
-                            ]
-                          }`}
-                          style={{
-                            width: `${Math.min(
-                              statVal,
-                              100
-                            )}%`,
-                          }}
-                        />
+  className={`h-2 rounded-full ${
+    statBarColors[
+      statName
+    ]
+  } transition-all duration-700 ease-out`}
+  style={{
+    width: barsReady
+  ? `${Math.min(statVal,100)}%`
+  : "0%"
+  }}
+/>
 
                       </div>
 
