@@ -25,6 +25,7 @@ function App() {
   const [query, setQuery] = useState("")
   const [loading, setLoading] = useState(false)
   const [offset, setOffset] = useState(0)
+  const [user, setUser] = useState<any>(null);
 
   const [favIds, setFavIds] = useState<number[]>(() => {
 
@@ -84,6 +85,25 @@ function App() {
     loadNames()
 
   }, [])
+  useEffect(() => {
+
+  const savedUser = localStorage.getItem("user");
+
+  if (savedUser) {
+
+    setUser(JSON.parse(savedUser));
+
+  }
+
+}, []);
+
+  const handleLogout = () => {
+
+  localStorage.removeItem("user");
+
+  setUser(null);
+
+};
 
   const loadPokemon = async () => {
 
@@ -354,8 +374,11 @@ function App() {
   toggleFilterPanel={() =>
     setFiltersOpen((prev) => !prev)
   }
-/>
 
+  user={user}
+  setUser={setUser}
+  handleLogout={handleLogout}
+/>
     <div className="p-6">
 
       <div className="max-w-6xl mx-auto mb-6">
