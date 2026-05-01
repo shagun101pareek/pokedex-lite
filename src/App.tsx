@@ -73,7 +73,7 @@ function App() {
     const loadNames = async () => {
 
       const res = await fetch(
-        `https://pokeapi.co/api/v2/pokemon?limit=100000`
+        `https://pokeapi.co/api/v2/pokemon?limit=1302`
       )
 
       const data = await res.json()

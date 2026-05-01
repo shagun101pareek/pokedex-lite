@@ -52,15 +52,20 @@ function PokemonCard({
   return (
     <div
       onClick={openDetails}
-      className={`${bg} relative shadow-md rounded-2xl p-5 w-60 text-center hover:shadow-lg transition duration-200 cursor-pointer`}
+      className={`${bg} group relative shadow-md rounded-2xl p-5 w-60 text-center 
+      transition-all duration-300 ease-out 
+      hover:-translate-y-2 hover:shadow-xl 
+      cursor-pointer`}
     >
 
+      {/* Favorite Button */}
       <button
         onClick={(e) => {
           e.stopPropagation()
           toggleFav(pokeId)
         }}
-        className="absolute top-3 right-3 bg-white p-2 rounded-full shadow hover:scale-110 transition"
+        className="absolute top-3 right-3 bg-white p-2 rounded-full shadow 
+        transition-transform duration-200 hover:scale-110"
       >
         <Heart
           size={16}
@@ -72,27 +77,35 @@ function PokemonCard({
         />
       </button>
 
+      {/* Pokemon ID */}
       <p className="text-sm text-gray-400 text-left font-medium">
         #{pokeId.toString().padStart(3, "0")}
       </p>
 
+      {/* Pokemon Image */}
       <img
         src={img}
         alt={title}
-        className="mx-auto w-28 h-28 my-2"
+        className="mx-auto w-28 h-28 my-2 
+        transition-transform duration-300 
+        group-hover:scale-110"
       />
 
+      {/* Pokemon Name */}
       <h2 className="text-lg font-semibold capitalize text-gray-800">
         {title}
       </h2>
 
+      {/* Pokemon Types */}
       <div className="flex justify-center gap-2 mt-3 flex-wrap">
 
         {pokeTypes.map((t) => (
 
           <span
             key={t}
-            className={`px-3 py-1 rounded-full text-xs font-medium capitalize ${
+            className={`px-3 py-1 rounded-full text-xs font-medium capitalize 
+            transition-transform duration-200
+            group-hover:scale-105 ${
               badgeColors[t] ||
               "bg-gray-200 text-gray-800"
             }`}
